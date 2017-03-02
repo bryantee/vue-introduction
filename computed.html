@@ -6,12 +6,20 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <script src="https://unpkg.com/vue"></script>
+  <style media="screen">
+    .completedTask {
+      text-decoration: line-through;
+    }
+  </style>
 </head>
 <body>
+
+
+
   <div id="main">
     <h1>Taks</h1>
     <ul id="list">
-      <li v-for="task in tasks" v-text="task.name"></li>
+      <li v-bind:class="{ completedTask: task.isComplete  }" v-for="task in tasks" v-text="task.name"></li>
     </ul>
 
     <h1>Incomplete Task</h1>
