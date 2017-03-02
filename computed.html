@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+  <div id="main">
+    <h1>Taks</h1>
+    <ul id="list">
+      <li v-for="task in tasks" v-text="task.name"></li>
+    </ul>
+
+    <h1>Incomplete Task</h1>
+    <ul id="incomplete-list">
+      <li @click="completeTask" v-for="task in incompleteTasks" v-text="task.name"></li>
+    </ul>
+  </div>
+
+  <script>
+
+  new Vue({
+    el: '#main',
+    data: {
+      tasks: [
+        { name: 'Take out trash', isComplete: true},
+        { name: 'Brush teeth', isComplete: false },
+        { name: 'Go for a run', isComplete: false }
+      ]
+    },
+    computed: {
+      incompleteTasks() {
+        return this.tasks.filter( task => !task.isComplete );
+      }
+    },
+    methods: {
+      completeTask(e) {
+        const selectedTask = e.target.textContent;
+        console.log(selectedTask);
+        this.tasks.forEach( (task, index) => {
+          if (task.name === selectedTask) {
+            this.tasks[index].isComplete = true;
+          }
+        });
+      }
+    }
+  });
+
+  </script>
+</body>
+</html>
